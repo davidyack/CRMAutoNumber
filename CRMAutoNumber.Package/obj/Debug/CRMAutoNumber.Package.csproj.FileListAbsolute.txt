@@ -1,0 +1,5 @@
+c:\test\CRMAutoNumber\CRMAutoNumber.Package\bin\Debug\CRMAutoNumber.dll
+c:\test\CRMAutoNumber\CRMAutoNumber.Package\bin\Debug\Microsoft.Xrm.Sdk.dll
+c:\test\CRMAutoNumber\CRMAutoNumber.Package\bin\Debug\Microsoft.Xrm.Sdk.Workflow.dll
+c:\test\CRMAutoNumber\CRMAutoNumber.Package\bin\Debug\CRMAutoNumber.pdb
+c:\test\CRMAutoNumber\CRMAutoNumber.Package\obj\Debug\CRMAutoNumber.Package.csprojResolveAssemblyReference.cache
