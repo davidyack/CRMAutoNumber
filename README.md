@@ -6,9 +6,11 @@ Simple example of using a Real Time Workflow and a Custom Activty to Auto Number
 
 Try it without building the code...simply import ctccrm_AutoNumberSequence_1_0_0_0_managed into your CRM organization
 
-Setup to Auto Number Account
+Remember to try things in a test organization (running with sharp objects can cause injury also FYI...)
 
-1) Import Auto Number Solution
+Setup to Auto Number Account on the built-in Account Number field
+
+1) Import Auto Number Solution (make sure to refresh to pickup navigation change)
 
 2) Navigate to Settings -> Auto Number Sequences
 
@@ -20,9 +22,9 @@ Setup to Auto Number Account
 
 6) Edit the properties on the Auto Number step and set Sequence Name = Account
 
-7) Insert an Update step following the Auto Number Step
+7) Insert an Update Record step following the Auto Number Step
 
-8) Set the properties Account Number to the Next Value of the Auto Number Step 
+8) Set the properties Account Number to the Next Value of the Auto Number Step (Use the Form Assistant Local Values)
 
 
 
