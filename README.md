@@ -1,4 +1,4 @@
-CRM Auto Number for Microsoft Dynamics CRM 2013
+CRM Auto Number for Microsoft Dynamics CRM
 =============
 
 Simple example of using a Real Time Workflow and a Custom Activty to Auto Number
