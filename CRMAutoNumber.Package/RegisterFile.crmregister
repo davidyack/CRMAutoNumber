@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Register xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/crm/2011/tools/pluginregistration">
   <Solutions>
-    <Solution Assembly="CRMAutoNumber.dll" Id="1cd8215e-c09c-e311-a193-00155d147208" IsolationMode="None" SourceType="Database">
+    <Solution Assembly="CRMAutoNumber.dll" Id="1cd8215e-c09c-e311-a193-00155d147208" IsolationMode="Sandbox" SourceType="Database">
       <WorkflowTypes>
         <WorkflowType FriendlyName="AutoNumber" Name="AutoNumber" Description="Utility Step to Update AutoNumber" WorkflowActivityGroupName="Utility Steps" Id="5aabbbfc-c09c-e311-a193-00155d147208" TypeName="CRMAutoNumber.AutoNumber" />
       </WorkflowTypes>
