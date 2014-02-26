@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
+using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,19 @@ namespace CRMAutoNumber
 
             Entity seqUpdate = new Entity("ctccrm_autonumbersequence");
             seqUpdate.Id = sequence.Id;
+
+            var updaterTag = Guid.NewGuid().ToString();
+            seqUpdate["ctccrm_updatertag"] = updaterTag;
+            service.Update(seqUpdate);
+
+            var seqVerify = service.Retrieve("ctccrm_autonumbersequence", seqUpdate.Id, 
+                new ColumnSet(new string[] { "ctccrm_autonumbersequenceid", "ctccrm_updatertag", "ctccrm_currentvalue" }));
+
+            if ((seqVerify.GetAttributeValue<string>("ctccrm_updatertag") != updaterTag) ||
+                (seqVerify.GetAttributeValue<int>("ctccrm_currentvalue") != sequence.Value))
+                throw new InvalidPluginExecutionException(OperationStatus.Retry,
+                                  "Concurrency issue with next value- please retry");
+
             nextValue = sequence.Value +1;
             seqUpdate["ctccrm_currentvalue"] = nextValue;
 
