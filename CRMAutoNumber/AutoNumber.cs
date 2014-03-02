@@ -56,7 +56,8 @@ namespace CRMAutoNumber
             try
             {
                 var sequenceName = this.SequenceName.Get(executionContext);
-                var nextValue = AutoNumberManager.GetNextSequence(service, sequenceName);
+                AutoNumberManager anm = new AutoNumberManager();
+                var nextValue = anm.GetNextSequence(service, sequenceName);
                 this.NextValue.Set(executionContext, nextValue);
             }
             catch (FaultException<OrganizationServiceFault> e)

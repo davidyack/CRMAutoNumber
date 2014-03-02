@@ -10,7 +10,15 @@ namespace CRMAutoNumber
 {
     public class AutoNumberManager
     {
-        public static int GetNextSequence(IOrganizationService service, string sequenceName)
+        public  int GetNextSequence(IOrganizationService service, string sequenceName)
+        {
+            int nextValue = GetNextSequenceInternal(service, sequenceName,0);
+
+            return nextValue;
+
+        }
+
+        private  int GetNextSequenceInternal(IOrganizationService service, string sequenceName,int timesRetried)
         {
             int nextValue = 0;
 
@@ -32,23 +40,28 @@ namespace CRMAutoNumber
 
             var updaterTag = Guid.NewGuid().ToString();
             seqUpdate["ctccrm_updatertag"] = updaterTag;
+
             service.Update(seqUpdate);
 
-            var seqVerify = service.Retrieve("ctccrm_autonumbersequence", seqUpdate.Id, 
+            var seqVerify = service.Retrieve("ctccrm_autonumbersequence", seqUpdate.Id,
                 new ColumnSet(new string[] { "ctccrm_autonumbersequenceid", "ctccrm_updatertag", "ctccrm_currentvalue" }));
 
             if ((seqVerify.GetAttributeValue<string>("ctccrm_updatertag") != updaterTag) ||
                 (seqVerify.GetAttributeValue<int>("ctccrm_currentvalue") != sequence.Value))
-                throw new InvalidPluginExecutionException(OperationStatus.Retry,
+            {
+                if (timesRetried < 5)
+                    return GetNextSequenceInternal(service, sequenceName, timesRetried +1);
+                else
+                    throw new InvalidPluginExecutionException(OperationStatus.Retry,
                                   "Concurrency issue with next value- please retry");
 
-            nextValue = sequence.Value +1;
+            }
+                
+            nextValue = sequence.Value + 1;
             seqUpdate["ctccrm_currentvalue"] = nextValue;
 
             service.Update(seqUpdate);
-
             return nextValue;
-
         }
     }
 }

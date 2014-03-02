@@ -25,7 +25,8 @@ namespace CRMAutoNumber.Test
 
             while (nextValue < 10)
             {
-                nextValue = AutoNumberManager.GetNextSequence(service, seqName);
+                AutoNumberManager anm = new AutoNumberManager();
+                nextValue = anm.GetNextSequence(service, seqName);
             }
 
             service.Delete("ctccrm_autonumbersequence", seqID);
